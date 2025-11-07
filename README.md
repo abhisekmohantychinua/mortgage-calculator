@@ -1,6 +1,6 @@
 # Mortgage Calculator (HTML/CSS/JS)
 
-A single‑file, responsive mortgage calculator that mirrors the UX of mortgagefinder.ae while remaining framework‑free. It includes residency‑aware limits, two‑way synced sliders and inputs, a filled slider track, an upfront costs modal with a detailed breakdown, and an international phone input (UAE by default).
+A single‑file, responsive mortgage calculator that mirrors the UX of mortgagefinder.ae while matching the calculation model used on hateemmortgage.com. It features two‑way synced sliders and inputs, a filled slider track, and an international phone input (UAE by default).
 
 ## Features
 
@@ -9,19 +9,11 @@ A single‑file, responsive mortgage calculator that mirrors the UX of mortgagef
   - Two‑column layout on desktop; stacks to one column on tablets/mobiles
   - Sticky results panel on desktop; disabled on small screens to prevent overlap
 - Calculator logic
-  - Centralized LIMITS config for min/max/steps and residency rules
-  - Residency segmented control (UAE national / UAE resident / Non resident)
+  - Centralized LIMITS config for min/max/steps
+  - Inputs: Finance Amount, Profit Rate, Finance Period
   - Two‑way sync between number inputs and range sliders
   - Range sliders render a filled track based on current value
-  - Enforced minimum loan to prevent "loan amount = 0" edge case
-  - Purchase price max set to 200,000,000 AED
-- Upfront costs modal (with accordion breakdown)
-  - Land department fee: 4% + 580 AED
-  - Registration trustee fee: 2,100 or 4,200 AED (threshold at 500,000)
-  - Mortgage registration fee: 0.25% of loan + 290 AED
-  - Real estate agency fee: 2% + 5% VAT
-  - Bank arrangement fee: 0.5% + 5% VAT
-  - Mortgage valuation fee: fixed 3,150 AED
+  - Outputs: Monthly Payment and Total Profit Paid
 - International phone input
   - Uses intl-tel-input v25.x, default country UAE, separate dial code
   - Preferred countries tuned for GCC and common markets
@@ -53,19 +45,15 @@ Then visit <http://localhost:8000> and open `index.html`.
 ## How it works
 
 - Centralized configuration lives in `index.html` inside the `LIMITS` object:
-  - purchasePrice: { min: 300000, max: 200000000, step: 10000 }
-  - period: { min: 1, max: 25, step: 1 }
-  - rate: { min: 1, max: 10, step: 0.01 }
-  - threshold: 5,000,000 (affects residency LTV/DP tiers)
-  - residency rules per segment: `uaeNational`, `uaeResident`, `nonResident`
+  - finance: { min: 100000, max: 5000000, step: 1000 }
+  - period: { min: 5, max: 40, step: 1 }
+  - rate: { min: 1, max: 15, step: 0.01 }
 - Inputs and sliders are tied together with clamping and step rounding:
   - Editing the text field updates the slider and vice versa
   - Sliders repaint a filled gradient track to visualize the value
-- Loan/DP coupling and safeguards:
-  - Down payment + loan amount = purchase price always
-  - Minimum loan percent enforced per residency to avoid zero loan bug
 - Monthly payment formula:
   - Amortized payment with principal P, monthly rate r, and term n months
+  - Total profit paid = (monthly payment × number of months) − principal
 
 ## UI/UX and responsiveness
 
@@ -76,9 +64,11 @@ Then visit <http://localhost:8000> and open `index.html`.
   - `html, body { max-width: 100%; overflow-x: hidden; }`
   - Inputs/labels are allowed to wrap; long labels break lines
 
-## Upfront costs modal
+## What changed vs the previous Dubai-specific version
 
-See the accordion breakdown in the modal. Values update live as you change purchase price, loan amount, or down payment. Fee rules are encoded in the `calcFees()` function in `index.html`.
+- Removed residency tiers, down payment, and purchase price inputs
+- Removed the upfront costs modal and fee calculations (DLD, trustee, etc.)
+- Simplified to match hateemmortgage.com: Finance Amount (100k–5M), Profit Rate (1–15%), Finance Period (5–40y)
 
 ## International phone input
 

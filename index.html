@@ -278,6 +278,7 @@
         font-size: 16px;
         cursor: pointer;
         font-weight: 700;
+        margin-top: 16px;
       }
       .mgc-btn:hover {
         filter: brightness(0.95);
@@ -504,101 +505,35 @@
 
     <div class="mgc-container">
       <div class="mgc-form-section">
-        <!-- Purchase Price -->
+        <!-- Finance Amount -->
         <div class="mgc-field">
-          <label>Purchase Price</label>
-          <div class="mgc-input-group">
-            <input
-              type="text"
-              id="mgc-purchasePriceInput"
-              class="mgc-text-input"
-              value="1,200,000"
-            />
-            <span class="mgc-suffix">AED</span>
-          </div>
-          <input
-            type="range"
-            id="mgc-purchasePrice"
-            min="300000"
-            max="200000000"
-            step="10000"
-            value="1200000"
-          />
-          <div class="mgc-range-labels">
-            <span id="mgc-purchaseMinLabel">300,000 AED</span>
-            <span id="mgc-purchaseMaxLabel">200,000,000 AED</span>
-          </div>
-        </div>
-
-        <!-- Residency Status -->
-        <div class="mgc-field">
-          <label>Residency Status</label>
-          <div class="mgc-residency">
-            <button id="mgc-uaeNational">UAE national</button>
-            <button id="mgc-uaeResident" class="active">UAE resident</button>
-            <button id="mgc-nonResident">Non resident</button>
-          </div>
-        </div>
-
-        <!-- Down Payment -->
-        <div class="mgc-field">
-          <label>Down payment</label>
-          <div class="mgc-input-group">
-            <input
-              type="text"
-              id="mgc-downPaymentInput"
-              class="mgc-text-input"
-              value="240,000"
-            />
-            <span class="mgc-suffix"
-              ><span id="mgc-downPercent">20</span>%</span
-            >
-          </div>
-          <input
-            type="range"
-            id="mgc-downPayment"
-            min="0"
-            max="1200000"
-            step="10000"
-            value="240000"
-          />
-          <div class="mgc-range-labels">
-            <span id="mgc-downMinLabel">0 AED</span>
-            <span id="mgc-downMaxLabel">1,200,000 AED</span>
-          </div>
-        </div>
-
-        <!-- Loan Amount -->
-        <div class="mgc-field">
-          <label>Loan amount</label>
+          <label>Finance Amount</label>
           <div class="mgc-input-group">
             <input
               type="text"
               id="mgc-loanAmountInput"
               class="mgc-text-input"
-              value="960,000"
+              value="300,000"
             />
-            <span class="mgc-suffix"
-              ><span id="mgc-loanPercent">80</span>%</span
-            >
+            <span class="mgc-suffix">AED</span>
           </div>
           <input
             type="range"
             id="mgc-loanAmount"
-            min="0"
-            max="1200000"
-            step="10000"
-            value="960000"
+            min="100000"
+            max="5000000"
+            step="1000"
+            value="300000"
           />
           <div class="mgc-range-labels">
-            <span id="mgc-loanMinLabel">0 AED</span>
-            <span id="mgc-loanMaxLabel">1,200,000 AED</span>
+            <span id="mgc-loanMinLabel">100,000 AED</span>
+            <span id="mgc-loanMaxLabel">5,000,000 AED</span>
           </div>
         </div>
 
-        <!-- Loan Period -->
+        <!-- Finance Period -->
         <div class="mgc-field">
-          <label>Loan Period</label>
+          <label>Finance Period</label>
           <div class="mgc-input-group">
             <input
               type="text"
@@ -608,16 +543,16 @@
             />
             <span class="mgc-suffix">years</span>
           </div>
-          <input type="range" id="mgc-loanPeriod" min="1" max="25" value="25" />
+          <input type="range" id="mgc-loanPeriod" min="5" max="40" value="25" />
           <div class="mgc-range-labels">
-            <span>1 year</span>
-            <span>25 years</span>
+            <span>5 years</span>
+            <span>40 years</span>
           </div>
         </div>
 
-        <!-- Interest Rate -->
+        <!-- Profit Rate -->
         <div class="mgc-field">
-          <label>Interest rate</label>
+          <label>Profit rate</label>
           <div class="mgc-input-group">
             <input
               type="text"
@@ -631,13 +566,13 @@
             type="range"
             id="mgc-interestRate"
             min="1"
-            max="10"
+            max="15"
             step="0.01"
             value="3.75"
           />
           <div class="mgc-range-labels">
             <span>1%</span>
-            <span>10%</span>
+            <span>15%</span>
           </div>
         </div>
       </div>
@@ -648,19 +583,13 @@
           <div class="mgc-kpis">
             <div class="mgc-kpi">
               <small>monthly payment</small>
-              <div class="mgc-num" id="mgc-monthlyPayment">4,936 AED</div>
+              <div class="mgc-num" id="mgc-monthlyPayment">0 AED</div>
             </div>
             <div class="mgc-kpi">
-              <small>with interest rate of</small>
-              <div class="mgc-num" id="mgc-rateDisplay">3.75%</div>
+              <small>total profit paid</small>
+              <div class="mgc-num" id="mgc-totalProfit">0 AED</div>
             </div>
           </div>
-          <div class="mgc-actions">
-            <button id="mgc-viewCostsBtn" class="mgc-btn-ghost" type="button">
-              View upfront costs
-            </button>
-          </div>
-          <div class="mgc-hr"></div>
           <form id="mgc-form" class="mgc-details">
             <h3>Please enter your details</h3>
             <input
@@ -698,141 +627,31 @@
       </div>
     </div>
 
-    <!-- Upfront Costs Modal -->
-    <div
-      id="mgc-costsModal"
-      class="mgc-modal-overlay"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div class="mgc-modal" role="document">
-        <div class="mgc-modal-header">
-          <div class="mgc-modal-title">Upfront costs breakdown</div>
-          <button
-            class="mgc-modal-close"
-            id="mgc-closeCostsBtn"
-            aria-label="Close"
-          >
-            ×
-          </button>
-        </div>
-        <div class="mgc-modal-body">
-          <div class="mgc-table">
-            <div class="mgc-table-row">
-              <div class="mgc-row-label">Down payment</div>
-              <div class="mgc-row-value" id="mgc-dpRowValue">0 AED</div>
-            </div>
-          </div>
-
-          <div id="mgc-costsAccordion" class="mgc-accordion open">
-            <button class="mgc-accordion-header" type="button">
-              <div style="display: flex; gap: 8px; align-items: center">
-                <svg
-                  class="mgc-accordion-chevron"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M11.6464 9.64645C11.8417 9.45118 12.1583 9.45118 12.3536 9.64645L15.3536 12.6464C15.5488 12.8417 15.5488 13.1583 15.3536 13.3536C15.1583 13.5488 14.8417 13.5488 14.6464 13.3536L12 10.7071L9.35355 13.3536C9.15829 13.5488 8.84171 13.5488 8.64645 13.3536C8.45118 13.1583 8.45118 12.8417 8.64645 12.6464L11.6464 9.64645Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <span>Total purchase costs</span>
-              </div>
-              <div class="mgc-accordion-value" id="mgc-totalCostsValue">
-                0 AED
-              </div>
-            </button>
-            <div class="mgc-accordion-body">
-              <ul class="mgc-fees-list">
-                <li>
-                  <span>Land department fee</span
-                  ><span id="mgc-landDeptValue">0 AED</span>
-                </li>
-                <li>
-                  <span>Registration trustee fee</span
-                  ><span id="mgc-trusteeValue">0 AED</span>
-                </li>
-                <li>
-                  <span>Mortgage registration fee</span
-                  ><span id="mgc-mortgageRegValue">0 AED</span>
-                </li>
-                <li>
-                  <span>Real estate agency fee</span
-                  ><span id="mgc-agencyValue">0 AED</span>
-                </li>
-                <li>
-                  <span>Bank arrangement fee</span
-                  ><span id="mgc-bankValue">0 AED</span>
-                </li>
-                <li>
-                  <span>Mortgage valuation fee</span
-                  ><span id="mgc-valuationValue">0 AED</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="mgc-modal-footer">
-          <button class="mgc-btn-outline" id="mgc-closeCostsBtn2" type="button">
-            Close
-          </button>
-          <button class="mgc-btn" type="button" id="mgc-proceedBtn">
-            Proceed
-          </button>
-        </div>
-      </div>
-    </div>
-
     <script>
-      // Centralized limits and residency rules (tweakable to match source site)
+      // Simplified calculator to match hateemmortgage.com
       const LIMITS = {
-        purchasePrice: { min: 300000, max: 200000000, step: 10000 },
-        period: { min: 1, max: 25, step: 1 },
-        rate: { min: 1, max: 10, step: 0.01 },
-        threshold: 5000000,
-        residency: {
-          uaeNational: { dpUnder: 0.15, dpOver: 0.25, loanMinPercent: 0.15 },
-          uaeResident: { dpUnder: 0.2, dpOver: 0.3, loanMinPercent: 0.2 },
-          nonResident: { dpUnder: 0.25, dpOver: 0.35, loanMinPercent: 0.25 },
-        },
+        finance: { min: 100000, max: 5000000, step: 1000 },
+        period: { min: 5, max: 40, step: 1 },
+        rate: { min: 1, max: 15, step: 0.01 },
       };
-      let activeResidency = "uaeResident"; // default selected in UI
-      const purchasePrice = document.getElementById("mgc-purchasePrice");
-      const downPayment = document.getElementById("mgc-downPayment");
-      const loanAmount = document.getElementById("mgc-loanAmount");
-      const loanPeriod = document.getElementById("mgc-loanPeriod");
-      const interestRate = document.getElementById("mgc-interestRate");
-      const monthlyPayment = document.getElementById("mgc-monthlyPayment");
 
-      // Text inputs
-      const purchasePriceInput = document.getElementById(
-        "mgc-purchasePriceInput"
-      );
-      const downPaymentInput = document.getElementById("mgc-downPaymentInput");
+      // Elements
+      const loanAmount = document.getElementById("mgc-loanAmount"); // finance amount
+      const loanPeriod = document.getElementById("mgc-loanPeriod"); // years
+      const interestRate = document.getElementById("mgc-interestRate"); // profit rate
+      const monthlyPayment = document.getElementById("mgc-monthlyPayment");
+      const totalProfitEl = document.getElementById("mgc-totalProfit");
+
       const loanAmountInput = document.getElementById("mgc-loanAmountInput");
       const loanPeriodInput = document.getElementById("mgc-loanPeriodInput");
       const interestRateInput = document.getElementById(
         "mgc-interestRateInput"
       );
 
-      // Dynamic labels and badges
-      const rateDisplay = document.getElementById("mgc-rateDisplay");
-      const downPercent = document.getElementById("mgc-downPercent");
-      const loanPercent = document.getElementById("mgc-loanPercent");
-      const purchaseMinLabel = document.getElementById("mgc-purchaseMinLabel");
-      const purchaseMaxLabel = document.getElementById("mgc-purchaseMaxLabel");
-      const downMinLabel = document.getElementById("mgc-downMinLabel");
-      const downMaxLabel = document.getElementById("mgc-downMaxLabel");
       const loanMinLabel = document.getElementById("mgc-loanMinLabel");
       const loanMaxLabel = document.getElementById("mgc-loanMaxLabel");
 
+      // Utils
       function format(num) {
         const n = Number(num);
         if (isNaN(n)) return "0";
@@ -844,12 +663,9 @@
       function clamp(v, min, max) {
         return Math.max(min, Math.min(max, v));
       }
-
       function roundToStep(value, step) {
         return Math.round(value / step) * step;
       }
-
-      // Paint a filled track for the slider based on value
       function setRangeFill(rangeEl) {
         const min = parseFloat(rangeEl.min || 0);
         const max = parseFloat(rangeEl.max || 1);
@@ -860,317 +676,101 @@
         rangeEl.style.backgroundImage = `linear-gradient(to right, var(--primary) 0%, var(--primary) ${p}%, #e9e5f4 ${p}%, #e9e5f4 100%)`;
       }
 
-      function calculateMonthlyPayment() {
-        const P = parseFloat(loanAmount.value);
-        const r = parseFloat(interestRate.value) / 100 / 12;
-        const n = parseInt(loanPeriod.value) * 12;
-        const m = r === 0 ? P / n : (P * r) / (1 - Math.pow(1 + r, -n));
-        monthlyPayment.innerText = format(m.toFixed(0)) + " AED";
-      }
-
-      function syncDownLoan() {
-        const total = parseFloat(purchasePrice.value);
-        // Respect dynamic min/max derived by applyConstraints
-        const dpMin = parseFloat(downPayment.min) || 0;
-        const dpMax = parseFloat(downPayment.max) || total;
-        let dp = clamp(parseFloat(downPayment.value) || 0, dpMin, dpMax);
-        let la = total - dp;
-        const loanMin = parseFloat(loanAmount.min) || 0;
-        const loanMax = parseFloat(loanAmount.max) || total;
-        if (la < loanMin) {
-          la = loanMin;
-          dp = total - la;
-        }
-        if (la > loanMax) {
-          la = loanMax;
-          dp = total - la;
-        }
-        // Round to step to avoid tiny drifts
-        dp = roundToStep(dp, LIMITS.purchasePrice.step);
-        la = roundToStep(la, LIMITS.purchasePrice.step);
-        downPayment.value = dp;
-        loanAmount.value = la;
-
-        const dpPercentVal = total > 0 ? Math.round((dp / total) * 100) : 0;
-        const laPercentVal = 100 - dpPercentVal;
-
-        downPercent.innerText = dpPercentVal;
-        loanPercent.innerText = laPercentVal;
-
-        // mirror to text inputs
-        downPaymentInput.value = format(dp);
-        loanAmountInput.value = format(la);
-      }
-
-      function updateSliderLabels() {
-        purchaseMinLabel.innerText = format(purchasePrice.min) + " AED";
-        purchaseMaxLabel.innerText = format(purchasePrice.max) + " AED";
-        downMinLabel.innerText = format(downPayment.min) + " AED";
-        downMaxLabel.innerText = format(downPayment.max) + " AED";
-        loanMinLabel.innerText = format(loanAmount.min) + " AED";
-        loanMaxLabel.innerText = format(loanAmount.max) + " AED";
-      }
-
-      function residencyRules(price) {
-        const cfg = LIMITS.residency[activeResidency];
-        const dpPct = price <= LIMITS.threshold ? cfg.dpUnder : cfg.dpOver;
-        const ltvCap = 1 - dpPct; // max you can borrow
-        const loanMinPct = cfg.loanMinPercent;
-        return { dpPct, ltvCap, loanMinPct };
-      }
-
-      function applyConstraints() {
-        // Base bounds
-        purchasePrice.min = LIMITS.purchasePrice.min;
-        purchasePrice.max = LIMITS.purchasePrice.max;
-        purchasePrice.step = LIMITS.purchasePrice.step;
+      function applyBounds() {
+        loanAmount.min = LIMITS.finance.min;
+        loanAmount.max = LIMITS.finance.max;
+        loanAmount.step = LIMITS.finance.step;
         loanPeriod.min = LIMITS.period.min;
         loanPeriod.max = LIMITS.period.max;
         interestRate.min = LIMITS.rate.min;
         interestRate.max = LIMITS.rate.max;
+        if (loanMinLabel)
+          loanMinLabel.innerText = format(loanAmount.min) + " AED";
+        if (loanMaxLabel)
+          loanMaxLabel.innerText = format(loanAmount.max) + " AED";
+      }
 
-        const price = clamp(
-          parseFloat(purchasePrice.value) || LIMITS.purchasePrice.min,
-          LIMITS.purchasePrice.min,
-          LIMITS.purchasePrice.max
+      function calculate() {
+        const P = clamp(
+          parseFloat(loanAmount.value) || 0,
+          LIMITS.finance.min,
+          LIMITS.finance.max
         );
-        const { dpPct, ltvCap, loanMinPct } = residencyRules(price);
+        const r =
+          clamp(
+            parseFloat(interestRate.value) || 0,
+            LIMITS.rate.min,
+            LIMITS.rate.max
+          ) /
+          100 /
+          12;
+        const n =
+          clamp(
+            parseInt(loanPeriod.value) || 0,
+            LIMITS.period.min,
+            LIMITS.period.max
+          ) * 12;
+        const m = r === 0 ? P / n : (P * r) / (1 - Math.pow(1 + r, -n));
+        const totalPaid = m * n;
+        const totalProfit = totalPaid - P;
+        if (monthlyPayment)
+          monthlyPayment.innerText = format(Math.round(m)) + " AED";
+        if (totalProfitEl)
+          totalProfitEl.innerText = format(Math.round(totalProfit)) + " AED";
+      }
 
-        let dpMin = roundToStep(price * dpPct, LIMITS.purchasePrice.step);
-        const loanMin = roundToStep(
-          price * loanMinPct,
-          LIMITS.purchasePrice.step
-        );
-        const loanMax = roundToStep(price * ltvCap, LIMITS.purchasePrice.step);
-        // Disallow DP values that eliminate the minimum loan
-        let dpMax = roundToStep(price - loanMin, LIMITS.purchasePrice.step);
-        if (dpMin > dpMax) dpMin = dpMax;
-
-        downPayment.min = dpMin;
-        downPayment.max = dpMax;
-        loanAmount.min = Math.min(loanMin, loanMax);
-        loanAmount.max = Math.max(loanMin, loanMax);
-
-        // Keep sum consistent
-        let dp = clamp(parseFloat(downPayment.value) || dpMin, dpMin, dpMax);
-        let la = price - dp;
-        if (la < loanAmount.min) {
-          la = loanAmount.min;
-          dp = price - la;
-        }
-        if (la > loanAmount.max) {
-          la = loanAmount.max;
-          dp = price - la;
-        }
-        downPayment.value = roundToStep(dp, LIMITS.purchasePrice.step);
-        loanAmount.value = roundToStep(la, LIMITS.purchasePrice.step);
-
-        updateSliderLabels();
-        [
-          purchasePrice,
-          downPayment,
-          loanAmount,
-          loanPeriod,
-          interestRate,
-        ].forEach(setRangeFill);
+      function reflectToInputs() {
+        loanAmountInput.value = format(loanAmount.value);
+        loanPeriodInput.value = String(parseInt(loanPeriod.value));
+        interestRateInput.value = String(parseFloat(interestRate.value));
       }
 
       function updateAll() {
-        // Reflect slider values to inputs
-        purchasePriceInput.value = format(purchasePrice.value);
-        applyConstraints();
-        updateSliderLabels();
-
-        interestRateInput.value = String(parseFloat(interestRate.value));
-        loanPeriodInput.value = String(parseInt(loanPeriod.value));
-        rateDisplay.innerText = parseFloat(interestRate.value).toFixed(2) + "%";
-        syncDownLoan();
-        calculateMonthlyPayment();
-        updateModalFigures();
-        [
-          purchasePrice,
-          downPayment,
-          loanAmount,
-          loanPeriod,
-          interestRate,
-        ].forEach(setRangeFill);
+        applyBounds();
+        reflectToInputs();
+        [loanAmount, loanPeriod, interestRate].forEach(setRangeFill);
+        calculate();
       }
 
       // Slider -> UI
-      purchasePrice.addEventListener("input", updateAll);
-      downPayment.addEventListener("input", () => {
-        syncDownLoan();
-        calculateMonthlyPayment();
-        setRangeFill(downPayment);
-        // Coupled slider also changes (loan = price - dp)
-        setRangeFill(loanAmount);
-      });
-      loanAmount.addEventListener("input", () => {
-        const total = parseFloat(purchasePrice.value);
-        const la = clamp(
-          parseFloat(loanAmount.value),
-          parseFloat(loanAmount.min),
-          Math.min(parseFloat(loanAmount.max), total)
-        );
-        loanAmount.value = la;
-        const dp = total - la;
-        downPayment.value = dp;
-        syncDownLoan();
-        calculateMonthlyPayment();
-        setRangeFill(loanAmount);
-        // Coupled slider also changes (dp = price - loan)
-        setRangeFill(downPayment);
-      });
-      [loanPeriod, interestRate].forEach((el) =>
+      [loanAmount, loanPeriod, interestRate].forEach((el) =>
         el.addEventListener("input", updateAll)
       );
-      // Ensure fills repaint on change (keyboard, touch-release)
-      [
-        purchasePrice,
-        loanPeriod,
-        interestRate,
-        downPayment,
-        loanAmount,
-      ].forEach((el) => el.addEventListener("change", () => setRangeFill(el)));
+      [loanAmount, loanPeriod, interestRate].forEach((el) =>
+        el.addEventListener("change", () => setRangeFill(el))
+      );
 
       // Text input -> Sliders
-      purchasePriceInput.addEventListener("input", () => {
-        const v = clamp(
-          parseNum(purchasePriceInput.value),
-          parseFloat(purchasePrice.min),
-          parseFloat(purchasePrice.max)
-        );
-        purchasePrice.value = v;
-        updateAll();
-      });
-      downPaymentInput.addEventListener("input", () => {
-        const min = parseFloat(downPayment.min);
-        const max = parseFloat(downPayment.max);
-        const v = clamp(parseNum(downPaymentInput.value), min, max);
-        downPayment.value = v;
-        syncDownLoan();
-        calculateMonthlyPayment();
-        setRangeFill(downPayment);
-        setRangeFill(loanAmount);
-      });
       loanAmountInput.addEventListener("input", () => {
-        const min = parseFloat(loanAmount.min);
-        const max = parseFloat(loanAmount.max);
-        const v = clamp(parseNum(loanAmountInput.value), min, max);
+        const v = clamp(
+          roundToStep(parseNum(loanAmountInput.value), LIMITS.finance.step),
+          LIMITS.finance.min,
+          LIMITS.finance.max
+        );
         loanAmount.value = v;
-        const total = parseFloat(purchasePrice.value);
-        downPayment.value = total - v;
-        syncDownLoan();
-        calculateMonthlyPayment();
         setRangeFill(loanAmount);
-        setRangeFill(downPayment);
+        calculate();
       });
       loanPeriodInput.addEventListener("input", () => {
         const v = clamp(
           parseInt(parseNum(loanPeriodInput.value) || 0),
-          parseInt(loanPeriod.min),
-          parseInt(loanPeriod.max)
+          LIMITS.period.min,
+          LIMITS.period.max
         );
         loanPeriod.value = v;
-        updateAll();
+        setRangeFill(loanPeriod);
+        calculate();
       });
       interestRateInput.addEventListener("input", () => {
         const v = clamp(
           parseNum(interestRateInput.value),
-          parseFloat(interestRate.min),
-          parseFloat(interestRate.max)
+          LIMITS.rate.min,
+          LIMITS.rate.max
         );
         interestRate.value = v;
-        updateAll();
+        setRangeFill(interestRate);
+        calculate();
       });
-
-      // Residency status toggle
-      document.querySelectorAll(".mgc-residency button").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          document
-            .querySelectorAll(".mgc-residency button")
-            .forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          if (btn.id === "mgc-uaeNational") activeResidency = "uaeNational";
-          if (btn.id === "mgc-uaeResident") activeResidency = "uaeResident";
-          if (btn.id === "mgc-nonResident") activeResidency = "nonResident";
-          updateAll();
-        });
-      });
-
-      // Upfront costs modal logic
-      const costsModal = document.getElementById("mgc-costsModal");
-      const viewCostsBtn = document.getElementById("mgc-viewCostsBtn");
-      const closeBtns = [
-        document.getElementById("mgc-closeCostsBtn"),
-        document.getElementById("mgc-closeCostsBtn2"),
-      ];
-      const costsAccordion = document.getElementById("mgc-costsAccordion");
-
-      function currency(n) {
-        return format(Math.round(n)) + " AED";
-      }
-      function calcFees() {
-        const price = parseFloat(purchasePrice.value) || 0;
-        const loan = parseFloat(loanAmount.value) || 0;
-        const dp = parseFloat(downPayment.value) || 0;
-        const landDept = price * 0.04 + 580; // 4% + admin
-        const trustee = price > 500000 ? 4200 : 2100; // threshold rule
-        const mortgageReg = loan * 0.0025 + 290; // 0.25% + admin
-        const agency = price * 0.02 * 1.05; // 2% + 5% VAT
-        const bank = loan * 0.005 * 1.05; // 0.5% + 5% VAT
-        const valuation = 3150; // fixed
-        const total =
-          landDept + trustee + mortgageReg + agency + bank + valuation;
-        return {
-          dp,
-          landDept,
-          trustee,
-          mortgageReg,
-          agency,
-          bank,
-          valuation,
-          total,
-        };
-      }
-      function updateModalFigures() {
-        const f = calcFees();
-        const set = (id, val) => {
-          const el = document.getElementById(id);
-          if (el) el.textContent = currency(val);
-        };
-        set("mgc-dpRowValue", f.dp);
-        set("mgc-totalCostsValue", f.total);
-        set("mgc-landDeptValue", f.landDept);
-        set("mgc-trusteeValue", f.trustee);
-        set("mgc-mortgageRegValue", f.mortgageReg);
-        set("mgc-agencyValue", f.agency);
-        set("mgc-bankValue", f.bank);
-        set("mgc-valuationValue", f.valuation);
-      }
-      function openModal() {
-        costsModal.classList.add("open");
-        costsModal.setAttribute("aria-hidden", "false");
-      }
-      function closeModal() {
-        costsModal.classList.remove("open");
-        costsModal.setAttribute("aria-hidden", "true");
-      }
-      if (viewCostsBtn) {
-        viewCostsBtn.addEventListener("click", () => {
-          updateModalFigures();
-          openModal();
-        });
-      }
-      closeBtns.forEach((b) => b && b.addEventListener("click", closeModal));
-      costsModal?.addEventListener("click", (e) => {
-        if (e.target === costsModal) closeModal();
-      });
-      costsAccordion
-        ?.querySelector(".mgc-accordion-header")
-        ?.addEventListener("click", () => {
-          costsAccordion.classList.toggle("open");
-        });
 
       // Initialize International Telephone Input (v25)
       const __initITI = () => {
@@ -1202,6 +802,7 @@
       document.addEventListener("DOMContentLoaded", __initITI);
       window.addEventListener("load", __initITI);
 
+      // Initial paint
       updateAll();
 
       // Form submission: log and alert labels with values
@@ -1210,23 +811,14 @@
         form?.addEventListener("submit", (e) => {
           e.preventDefault();
           const values = [
-            ["Purchase Price", purchasePriceInput.value + " AED"],
+            ["Finance Amount", loanAmountInput.value + " AED"],
+            ["Finance Period", loanPeriodInput.value + " years"],
             [
-              "Down Payment",
-              downPaymentInput.value +
-                " AED (" +
-                downPercent.textContent +
-                "%)",
-            ],
-            [
-              "Loan Amount",
-              loanAmountInput.value + " AED (" + loanPercent.textContent + "%)",
-            ],
-            ["Loan Period", loanPeriodInput.value + " years"],
-            [
-              "Interest Rate",
+              "Profit Rate",
               parseFloat(interestRateInput.value).toFixed(2) + "%",
             ],
+            ["Monthly Payment", monthlyPayment.textContent],
+            ["Total Profit Paid", totalProfitEl.textContent],
             ["Name", document.getElementById("mgc-name").value],
             ["Email", document.getElementById("mgc-email").value],
             [
